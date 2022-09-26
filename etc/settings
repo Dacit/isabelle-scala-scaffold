@@ -1,0 +1,4 @@
+# -*- shell-script -*- :mode=shellscript:
+
+SCAFFOLD_HOME="$COMPONENT"
+SCAFFOLD_JAR="$SCAFFOLD_HOME/lib/isabelle_scaffold.jar"

@@ -1,0 +1,8 @@
+title = Isabelle Scala Scaffold
+module = $SCAFFOLD_JAR
+requirements = \
+  env:ISABELLE_SCALA_JAR
+sources = \
+  src/scaffold.scala \
+  src/token_markup.scala
+services = isabelle.scaffold.Tools
