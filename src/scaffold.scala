@@ -92,6 +92,12 @@ object Scaffold {
       val theories = base.proper_session_theories.map(_.theory)
 
       using(Export.open_session_context0(store, session_name))(session_context => {
+        // Loads export view + command spans
+        val exports = Export_Theory.read_session(session_context, progress = progress)
+        progress.echo(
+          "Number of exported theories in " + session_name + ": " + exports.theories.length)
+
+        // Load markup + sources
         val result =
           for {
             db <- session_context.session_db()
@@ -110,9 +116,8 @@ object Scaffold {
                   progress.echo_warning(thy_heading + " missing")
                   None
                 case Some(snapshot) =>
-                  // Loads export view + command spans
-                  val exports = Export_Theory.read_session(session_context)
                   val command_spans = snapshot.state.commands.values.map(_.command.span)
+                  progress.echo("Number of commands in " + thy + ": " + command_spans.size)
                   // TODO: do something with the stuff!
               }
             }
